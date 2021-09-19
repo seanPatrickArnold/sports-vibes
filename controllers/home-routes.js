@@ -52,10 +52,18 @@ router.get('/post/:id', (req, res) => {
       {
         model: PostCorrelation,
         attributes: ['id', 'correlated_post_id'],
-        include: {
+        include: [
+          {
           model: Vote,
           attributes: ['user_id', 'post_correlation_id']
-        }
+          },
+          {
+            model: Post,
+            attributes: [
+              [sequelize.literal('(SELECT title FROM post WHERE post.id = post_correlations.correlated_post_id)'), 'title']
+            ]
+          }
+        ]
       },
       {
         model: User,

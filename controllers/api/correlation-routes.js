@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { PostCorrelation } = require('../../models');
+const { PostCorrelation, Vote } = require('../../models');
 
 router.get('/', (req, res) => {
   PostCorrelation.findAll()
@@ -14,7 +14,7 @@ router.post('/', (req, res) => {
   // check the session
   if (req.session) {
     PostCorrelation.create({
-      correlated_post_id: req.body.correlated_post_id,
+      post_correlation_id: req.body.post_correlation_id,
       post_id: req.body.post_id,
       // use the id from the session
       user_id: req.session.user_id
@@ -23,6 +23,19 @@ router.post('/', (req, res) => {
       .catch(err => {
         console.log(err);
         res.status(400).json(err);
+      });
+  }
+});
+
+router.put('/upvote', (req, res) => {
+  // make sure the session exists first
+  if (req.session) {
+    // pass session id along with all destructured properties on req.body
+    PostCorrelation.upvote({ ...req.body, user_id: req.session.user_id }, { Vote })
+      .then(updatedVoteData => res.json(updatedVoteData))
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
       });
   }
 });

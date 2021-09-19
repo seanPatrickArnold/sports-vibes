@@ -36,10 +36,18 @@ router.get('/:id', (req, res) => {
       {
         model: PostCorrelation,
         attributes: ['id', 'correlated_post_id'],
-        include: {
-          model: Vote,
-          attributes: ['user_id', 'post_correlation_id']
-        }
+        include: [
+          {
+            model: Vote,
+            attributes: ['user_id', 'post_correlation_id']
+          },
+          {
+            model: Post,
+            attributes: [
+              [sequelize.literal('(SELECT title FROM post WHERE post.id = post_correlations.correlated_post_id)'), 'title']
+            ]
+          }
+        ]
       },
       {
         model: User,
@@ -72,19 +80,6 @@ router.post('/', (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
-});
-
-router.put('/upvote', (req, res) => {
-  // make sure the session exists first
-  if (req.session) {
-    // pass session id along with all destructured properties on req.body
-    Post.upvote({ ...req.body, user_id: req.session.user_id }, { Vote, Comment, User })
-      .then(updatedVoteData => res.json(updatedVoteData))
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-      });
-  }
 });
 
 router.put('/:id', (req, res) => {
