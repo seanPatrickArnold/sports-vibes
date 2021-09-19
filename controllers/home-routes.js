@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const { Post, User, Comment, Vote } = require('../models');
+const { Post, User, Vote, PostCorrelation } = require('../models');
 
 // get all posts for homepage
 router.get('/', (req, res) => {
@@ -10,22 +10,7 @@ router.get('/', (req, res) => {
       'id',
       'post_url',
       'title',
-      'created_at',
-      [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
-    ],
-    include: [
-      {
-        model: Comment,
-        attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-        include: {
-          model: User,
-          attributes: ['username']
-        }
-      },
-      {
-        model: User,
-        attributes: ['username']
-      }
+      'created_at'
     ]
   })
     .then(dbPostData => {
@@ -61,16 +46,15 @@ router.get('/post/:id', (req, res) => {
       'id',
       'post_url',
       'title',
-      'created_at',
-      [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
+      'created_at'
     ],
     include: [
       {
-        model: Comment,
-        attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+        model: PostCorrelation,
+        attributes: ['id', 'correlated_post_id'],
         include: {
-          model: User,
-          attributes: ['username']
+          model: Vote,
+          attributes: ['user_id', 'post_correlation_id']
         }
       },
       {
