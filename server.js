@@ -14,7 +14,8 @@ const sequelize = require('./config/connection');
 const sess = {
   secret: 'Super secret secret',
   cookie: {
-    maxAge: 1*3600*1000},
+    maxAge: 1 * 3600 * 1000
+  },
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
@@ -39,4 +40,4 @@ sequelize.sync({ force: true }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
 });
 
-seedAll();
+// seedAll();
