@@ -16,11 +16,12 @@ Vote.init(
         model: 'user',
         key: 'id'
       }
+
     },
-    post_id: {
+    post_correlation_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'post',
+        model: 'post_correlation',
         key: 'id'
       }
     }

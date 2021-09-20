@@ -1,0 +1,11 @@
+<div class="correlated-posts">
+  <p>Correlated Posts</p>
+  <div id="correlations-div">
+    {{#each this}}
+      <div class="text" id='correlation-{{correlated_post_id}}'>
+        <a href="/post/{{correlated_post_id}}">{{post.title}}</a>
+        <button class="upvote-btn" id='correlation-{{correlated_post_id}}-btn'>Upvote</button>
+      </div>
+    {{/each}}
+  </div>
+</div>

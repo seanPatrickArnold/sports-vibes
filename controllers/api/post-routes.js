@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('../../config/connection');
-const { Post, User, Comment, Vote } = require('../../models');
+const { Post, User, Comment, Vote, PostCorrelation } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // get all users
@@ -11,22 +11,7 @@ router.get('/', (req, res) => {
       'id',
       'post_url',
       'title',
-      'created_at',
-      [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
-    ],
-    include: [
-      {
-        model: Comment,
-        attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-        include: {
-          model: User,
-          attributes: ['username']
-        }
-      },
-      {
-        model: User,
-        attributes: ['username']
-      }
+      'created_at'
     ]
   })
     .then(dbPostData => res.json(dbPostData))
@@ -45,17 +30,24 @@ router.get('/:id', (req, res) => {
       'id',
       'post_url',
       'title',
-      'created_at',
-      [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
+      'created_at'
     ],
     include: [
       {
-        model: Comment,
-        attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-        include: {
-          model: User,
-          attributes: ['username']
-        }
+        model: PostCorrelation,
+        attributes: ['id', 'correlated_post_id'],
+        include: [
+          {
+            model: Vote,
+            attributes: ['user_id', 'post_correlation_id']
+          },
+          {
+            model: Post,
+            attributes: [
+              [sequelize.literal('(SELECT title FROM post WHERE post.id = post_correlations.correlated_post_id)'), 'title']
+            ]
+          }
+        ]
       },
       {
         model: User,
@@ -88,19 +80,6 @@ router.post('/', (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
-});
-
-router.put('/upvote', (req, res) => {
-  // make sure the session exists first
-  if (req.session) {
-    // pass session id along with all destructured properties on req.body
-    Post.upvote({ ...req.body, user_id: req.session.user_id }, { Vote, Comment, User })
-      .then(updatedVoteData => res.json(updatedVoteData))
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-      });
-  }
 });
 
 router.put('/:id', (req, res) => {
