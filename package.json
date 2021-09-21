@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "seeds": "node seeds/index.js"
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
@@ -14,7 +14,7 @@
     "connect-session-sequelize": "^7.1.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "express-handlebars": "^3.1.0",
+    "express-handlebars": "^5.3.3",
     "express-session": "^1.17.2",
     "handlebars": "^4.7.3",
     "mysql2": "^2.1.0",
