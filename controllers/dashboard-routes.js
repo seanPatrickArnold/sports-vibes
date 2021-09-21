@@ -4,7 +4,6 @@ const { Post, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', withAuth, (req, res) => {
-  console.log('MAXAGE: ', req.session.cookie.maxAge);
   if (req.session) {
     Post.findAll({
       where: {
@@ -14,24 +13,13 @@ router.get('/', withAuth, (req, res) => {
       attributes: [
         'id',
         'post_url',
-        'title',
-        'created_at',
-        [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
+        'title'
       ],
-      include: [
-        {
-          model: Comment,
-          attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-          include: {
-            model: User,
-            attributes: ['username']
-          }
-        },
-        {
-          model: User,
-          attributes: ['username']
-        }
-      ]
+      include: {
+        model: User,
+        attributes: ['username']
+      }
+      
     })
       .then(dbPostData => {
         // serialize data before passing to template
@@ -46,36 +34,20 @@ router.get('/', withAuth, (req, res) => {
 });
 
   router.get('/edit/:id', withAuth, (req, res) => {
+    console.log(req.params.id);
     Post.findOne({
         where: {
             id: req.params.id
         },
         attributes: [
-            'id',
-            'post_url',
-            'title',
-            'created_at',
-            [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
-        ],
-        include: [
-            {
-                model: Comment,
-                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-                include: {
-                model: User,
-                attributes: ['username']
-                }
-            },
-            {
-                model: User,
-                attributes: ['username']
-            }
+          'id',
+          'post_url',
+          'title'
         ]
     })
         .then(dbPostData => {
         if (!dbPostData) {
-            res.status(404).json({ message: 'No post found with this id' });
-            return;
+          res.render('edit-post');
         }
         const post = dbPostData.get({ plain: true });
         

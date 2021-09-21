@@ -80,28 +80,17 @@ router.post('/', (req, res) => {
     });
 });
 
-router.put('/:id', (req, res) => {
-  Post.update(
-    {
-      title: req.body.title
-    },
-    {
-      where: {
-        id: req.params.id
-      }
-    }
-  )
-    .then(dbPostData => {
-      if (!dbPostData) {
-        res.status(404).json({ message: 'No post found with this id' });
-        return;
-      }
-      res.json(dbPostData);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+router.post('/addCorrelation', (req, res) => {
+  // make sure the session exists first
+  if (req.session) {
+    // pass session id along with all destructured properties on req.body
+    Post.addCorrelation({ ...req.body, user_id: req.session.user_id }, { PostCorrelation })
+      .then(data => res.json(data))
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  }
 });
 
 router.delete('/:id', withAuth, (req, res) => {

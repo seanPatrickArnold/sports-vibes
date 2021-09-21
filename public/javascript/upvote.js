@@ -1,11 +1,17 @@
 async function upvoteClickHandler(event) {
     event.preventDefault();
 
+    const post_id = window.location.toString().split('/')[
+        window.location.toString().split('/').length - 1
+      ];
+
+    console.log(post_id);
+
     const response = await fetch('/api/correlations/upvote', {
         method: 'PUT',
         body: JSON.stringify({
-            post_id: 1,
-            post_correlation_id: 1
+            post_id: post_id,
+            correlated_post_id: event.target.id.split('-')[1]
         }),
         headers: {
             'Content-Type': 'application/json'
@@ -22,8 +28,6 @@ async function upvoteClickHandler(event) {
 
 const correlationsDiv = document.getElementById('correlations-div');
 for (let i = 0; i < correlationsDiv.children.length; i++) {
-    console.log(i);
-    console.log(correlationsDiv.children[i].id);
     document.getElementById(correlationsDiv.children[i].id + '-btn').addEventListener('click', upvoteClickHandler);
 }
 

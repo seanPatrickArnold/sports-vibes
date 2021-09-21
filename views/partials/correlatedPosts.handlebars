@@ -4,9 +4,9 @@
     {{#each this}}
     <div class="text" id='correlation-{{correlated_post_id}}'>
       <a href="/post/{{correlated_post_id}}">{{post.title}}</a>
-      {{#if loggedIn}}
+      {{!-- {{#if loggedIn}} --}}
       <button class="upvote-btn" id='correlation-{{correlated_post_id}}-btn'>Upvote</button>
-      {{/if}}
+      {{!-- {{/if}} --}}
     </div>
     {{/each}}
   </div>

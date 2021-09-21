@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { PostCorrelation, Vote } = require('../../models');
+const { PostCorrelation, Post, Vote } = require('../../models');
 
 router.get('/', (req, res) => {
   PostCorrelation.findAll()

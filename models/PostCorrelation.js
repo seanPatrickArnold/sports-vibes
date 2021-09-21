@@ -3,25 +3,25 @@ const sequelize = require('../config/connection');
 
 class PostCorrelation extends Model {
   static upvote(body, models) {
-    return models.Vote.create({
-      user_id: body.user_id,
-      post_correlation_id: body.post_correlation_id
-
-    }).then(() => {
-      // return PostCorrelation.findOne({
-      //   where: {
-      //     user_id: body.user_id,
-      //     post_id: body.post_id,
-      //     correlated_post_id: body.post_correlation_id
-      //   },
-      //   attributes: [
-      //     'id',
-      //     [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post_correlation.id = vote.post_correlation_id)'), 'vote_count']
-      //   ]
-      // });
+    return PostCorrelation.findOne({
+      where: {
+        post_id: body.post_id,
+        correlated_post_id: body.correlated_post_id
+      },
+      attributes: [
+        'id'
+      ]
+    })
+    .then((data) => {
+      return models.Vote.create({
+        user_id: body.user_id,
+        post_correlation_id: data.post_correlation_id
+      })
+    })
+    .then(() => {
       return;
     });
-  }
+  };
 }
 
 PostCorrelation.init(
@@ -58,6 +58,11 @@ PostCorrelation.init(
     sequelize,
     freezeTableName: true,
     underscored: true,
+    uniqueKeys: {
+      Items_unique: {
+          fields: ['post_id', 'correlated_post_id']
+      }
+    },
     modelName: 'post_correlation'
   }
 );

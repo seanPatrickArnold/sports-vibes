@@ -9,4 +9,16 @@
   </div>
 </article>
 {{> correlatedPosts post.post_correlations }}
+<section>
+  <h2>Create New Correlation</h2>
+
+  <form class="new-correlation-form">
+    <div>
+      <label for="correlted-post-url">Link</label>
+      <input id="correlated-post-url" name="correlated-post-url" />
+    </div>
+    <button type="submit" class="btn">Create</button>
+  </form>
+</section>
 <script src="/javascript/upvote.js"></script>
+<script src="/javascript/add-correlation.js"></script>
