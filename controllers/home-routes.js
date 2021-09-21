@@ -54,8 +54,8 @@ router.get('/post/:id', (req, res) => {
         attributes: ['id', 'correlated_post_id'],
         include: [
           {
-          model: Vote,
-          attributes: ['user_id', 'post_correlation_id']
+            model: Vote,
+            attributes: ['user_id', 'post_correlation_id']
           },
           {
             model: Post,
@@ -82,8 +82,8 @@ router.get('/post/:id', (req, res) => {
 
       // pass data to template
       res.render('single-post', {
-        post: post,
-        loggedIn: req.session.loggedIn
+        post: { ...post, loggedIn: req.session.loggedIn }
+        // loggedIn: req.session.loggedIn
       });
     })
     .catch(err => {
@@ -95,7 +95,7 @@ router.get('/post/:id', (req, res) => {
 
 router.get('/database', () => {
   sequelize.query('SELECT * FROM user')
-    .then(function(rows) {
+    .then(function (rows) {
       console.log(JSON.stringify(rows));
     });
 });

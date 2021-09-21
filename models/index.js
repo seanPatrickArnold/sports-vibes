@@ -44,7 +44,7 @@ User.hasMany(Vote, {
 });
 
 PostCorrelation.hasMany(Vote, {
-  foreignKey: 'post_id'
+  foreignKey: 'post_correlation_id'
 });
 
 Post.belongsTo(User, {

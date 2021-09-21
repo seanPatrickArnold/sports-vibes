@@ -13,13 +13,7 @@ const sequelize = require('./config/connection');
 
 const sess = {
   secret: 'Super secret secret',
-<<<<<<< HEAD
-  cookie: {
-    maxAge: 1 * 3600 * 1000
-  },
-=======
   cookie: {},
->>>>>>> 8b8bf597b4748b8d962de108b990ba326e7c9e64
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({

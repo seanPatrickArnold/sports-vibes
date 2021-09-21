@@ -35,19 +35,17 @@ router.get('/:id', (req, res) => {
     include: [
       {
         model: PostCorrelation,
-        attributes: ['id', 'correlated_post_id'],
-        include: [
-          {
-            model: Vote,
-            attributes: ['user_id', 'post_correlation_id']
-          },
-          {
-            model: Post,
-            attributes: [
-              [sequelize.literal('(SELECT title FROM post WHERE post.id = post_correlations.correlated_post_id)'), 'title']
-            ]
-          }
-        ]
+        attributes: [
+          'id',
+          'correlated_post_id',
+          [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post_correlations.id = vote.post_correlation_id)'), 'vote_count']
+        ],
+        include: {
+          model: Post,
+          attributes: [
+            [sequelize.literal('(SELECT title FROM post WHERE post.id = post_correlations.correlated_post_id)'), 'title']
+          ]
+        }
       },
       {
         model: User,
