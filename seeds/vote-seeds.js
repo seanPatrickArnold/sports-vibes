@@ -7,7 +7,11 @@ const votedata = [
   },
   {
     user_id: 8,
-    post_correlation_id: 1
+    post_correlation_id: 2
+  },
+  {
+    user_id: 2,
+    post_correlation_id: 3
   }
 ];
 

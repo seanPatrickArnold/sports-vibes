@@ -1,11 +1,14 @@
 <div class="correlated-posts">
-  <p>Correlated Posts</p>
+  <h2>Correlated Posts</h2>
   <div id="correlations-div">
     {{#each this}}
-    <div class="text" id='correlation-{{correlated_post_id}}'>
+    <div class="correlations" id='correlation-{{correlated_post_id}}'>
+      <br></br>
       <a href="/post/{{correlated_post_id}}">{{post.title}}</a>
+      <p>Votes: <span id='vote-count'>{{voteCount}}</span></p>
       {{!-- {{#if loggedIn}} --}}
       <button class="upvote-btn" id='correlation-{{correlated_post_id}}-btn'>Upvote</button>
+      <br></br>
       {{!-- {{/if}} --}}
     </div>
     {{/each}}

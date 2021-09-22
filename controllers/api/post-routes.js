@@ -38,7 +38,7 @@ router.get('/:id', (req, res) => {
         attributes: [
           'id',
           'correlated_post_id',
-          [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post_correlations.id = vote.post_correlation_id)'), 'vote_count']
+          [sequelize.literal('(SELECT IFNULL(COUNT(*),0) FROM vote WHERE post_correlations.id = vote.post_correlation_id)'), 'voteCount']
         ],
         include: {
           model: Post,

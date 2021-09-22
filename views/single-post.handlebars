@@ -1,14 +1,9 @@
 <article class="post">
   <div class="title">
-    <a href="{{post.post_url}}">{{post.title}}</a>
+    <h2>{{post.title}}</h2>
     <span>({{post.post_url}})</span>
   </div>
-  <div class="meta">
-    By {{post.user.username}} on
-    {{post.created_at}}
-  </div>
 </article>
-{{> correlatedPosts post.post_correlations }}
 <section>
   <h2>Create New Correlation</h2>
 
@@ -20,5 +15,7 @@
     <button type="submit" class="btn">Create</button>
   </form>
 </section>
+{{> correlatedPosts post.post_correlations }}
+
 <script src="/javascript/upvote.js"></script>
 <script src="/javascript/add-correlation.js"></script>
