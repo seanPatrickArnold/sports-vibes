@@ -1,6 +1,6 @@
 
 <section>
-  <h2>Create New Post</h2>
+  <h2>Upload Image</h2>
 
   <form class="new-post-form">
     <div>
@@ -8,10 +8,10 @@
       <input type="text" id="post-title" name="post-title" />
     </div>
     <div>
-      <label for="post-url">Link</label>
-      <input id="post-url" name="post-url" />
+      <label for="post-url">Image</label>
+      <input type="file" id="post-url" name="postUrl" accept="image/*" />
     </div>
-    <button type="submit" class="btn">Create</button>
+    <button type="submit" class="btn">Post</button>
   </form>
 </section>
 {{#if posts.length}}
