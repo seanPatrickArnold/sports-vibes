@@ -13,9 +13,10 @@ class PostCorrelation extends Model {
       ]
     })
     .then((data) => {
+      console.log(data.id);
       return models.Vote.create({
         user_id: body.user_id,
-        post_correlation_id: data.post_correlation_id
+        post_correlation_id: data.id
       })
     })
     .then(() => {
