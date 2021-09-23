@@ -85,10 +85,21 @@ router.get('/post/:id', (req, res) => {
       const post = dbPostData.get({ plain: true });
 
       // pass data to template
+      // res.json({
+      //   post: {
+      //     ...post,
+      //     loggedIn: req.session.loggedIn
+      //   },
+      //   loggedIn: req.session.loggedIn
+      // });
       res.render('single-post', {
-        post: { ...post, loggedIn: req.session.loggedIn }
-        // loggedIn: req.session.loggedIn
-      });
+          post: {
+            ...post,
+            loggedIn: req.session.loggedIn
+          },
+          loggedIn: req.session.loggedIn
+        }
+      );
     })
     .catch(err => {
       console.log(err);

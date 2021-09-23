@@ -15,7 +15,20 @@
     <button type="submit" class="btn">Create</button>
   </form>
 </section>
-{{> correlatedPosts post.post_correlations }}
+<div class="correlated-posts">
+  <h2>Correlated Posts {{post.loggedIn}}</h2>
+  <div id="correlations-div">
+    {{#each post.post_correlations}}
+    <div class="correlations" id='correlation-{{correlated_post_id}}'>
+      <br></br>
+      <a href="/post/{{correlated_post_id}}">{{post.title}}</a>
+      <p>Votes: <span id='vote-count'>{{voteCount}}</span></p>
+      <button class="upvote-btn" id='correlation-{{correlated_post_id}}-btn'>Upvote</button>
+      <br></br>
+    </div>
+    {{/each}}
+  </div>
+</div>
 
 <script src="/javascript/upvote.js"></script>
 <script src="/javascript/add-correlation.js"></script>
