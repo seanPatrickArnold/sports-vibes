@@ -30,7 +30,9 @@ router.get('/:id', (req, res) => {
       'id',
       'post_url',
       'title',
-      'created_at'
+      'created_at',
+      'type_image',
+      'type_audio'
     ],
     include: [
       {
@@ -43,6 +45,8 @@ router.get('/:id', (req, res) => {
         include: {
           model: Post,
           attributes: [
+            [sequelize.literal('(SELECT type_image FROM post WHERE post.id = post_correlations.correlated_post_id)'), 'type_image'],
+            [sequelize.literal('(SELECT type_audio FROM post WHERE post.id = post_correlations.correlated_post_id)'), 'type_audio'],
             [sequelize.literal('(SELECT post_url FROM post WHERE post.id = post_correlations.correlated_post_id)'), 'post_url'],
             [sequelize.literal('(SELECT title FROM post WHERE post.id = post_correlations.correlated_post_id)'), 'title']
           ]
@@ -72,7 +76,9 @@ router.post('/', (req, res) => {
   Post.create({
     title: req.body.title,
     post_url: req.body.post_url,
-    user_id: req.session.user_id
+    user_id: req.session.user_id,
+    type_image: req.body.type_image,
+    type_audio: req.body.type_audio
   })
     .then(dbPostData => res.json(dbPostData))
     .catch(err => {

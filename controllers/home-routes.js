@@ -46,7 +46,9 @@ router.get('/post/:id', (req, res) => {
       'id',
       'post_url',
       'title',
-      'created_at'
+      'created_at',
+      'type_image',
+      'type_audio'
     ],
     include: [
       {
@@ -64,6 +66,8 @@ router.get('/post/:id', (req, res) => {
           {
             model: Post,
             attributes: [
+              [sequelize.literal('(SELECT type_image FROM post WHERE post.id = post_correlations.correlated_post_id)'), 'type_image'],
+              [sequelize.literal('(SELECT type_audio FROM post WHERE post.id = post_correlations.correlated_post_id)'), 'type_audio'],
               [sequelize.literal('(SELECT post_url FROM post WHERE post.id = post_correlations.correlated_post_id)'), 'post_url'],
               [sequelize.literal('(SELECT title FROM post WHERE post.id = post_correlations.correlated_post_id)'), 'title']
             ]
