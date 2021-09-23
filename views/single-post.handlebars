@@ -2,22 +2,35 @@
   <div class="title">
     <h2>{{post.title}}</h2>
     <img src='{{post.post_url}}' id='post-image'></img>
-    <span>({{post.post_url}})</span>
+    {{!-- <span>({{post.post_url}})</span> --}}
   </div>
 </article>
 <section>
   <h2>Create New Correlation</h2>
-
+{{!-- LISTEN:::: --}}
+{{!-- BASICALLY YOU WANT TO RUN CREATE POST AGAIN THEN 
+ONCE ITS CREATED HERE IN THE CREATE CORRELATION
+YOU WANT TO APPEND IT TO THIS PAGE AND NOT THE ROOT PAGE --}}
   <form class="new-correlation-form">
     <div>
-      <label for="correlted-post-url">Link</label>
-      <input id="correlated-post-url" name="correlated-post-url" />
+      <label for="correlation-title">Correlation Title</label>
+      <input type="text" id="correlation-title" name="correlation-title">
     </div>
-    <button type="submit" class="btn">Create</button>
+    {{!-- <div>
+      <label for="image-path">Image Path</label>
+      <input id="correlated-post-url" name="correlated-post-url" />
+    </div> --}}
+    <div>
+      <label for="image-path">Image Path</label>
+      <input type="text" name="image-path" id="image-path" name="image-path">
+    </div>
+    <button type="submit" class="btn">Create Correlation</button>
   </form>
+
 </section>
 <div class="correlated-posts">
-  <h2>Correlated Posts {{post.loggedIn}}</h2>
+  {{!-- <h2>Correlated Posts {{post.loggedIn}}</h2> --}}
+  <h2>Correlated Posts</h2>
   <div id="correlations-div">
     {{#each post.post_correlations}}
     <div class="correlations" id='correlation-{{correlated_post_id}}'>

@@ -1,6 +1,13 @@
 <article class="post">
   <div class="title">
     <a href="/post/{{id}}">{{title}}</a>
-    <span>({{format_url post_url}})</span>
+    {{!-- <span>({{format_url post_url}})</span> --}}
+    <img
+      style="width:200px;height:200px;border-radius:50%"
+      src="{{post_url}}"
+      alt="{{title}}"
+    />
+    {{!-- <img src="{{post_url}}" alt="{{title}}" /> --}}
+
   </div>
 </article>
