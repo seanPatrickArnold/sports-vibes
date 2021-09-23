@@ -4,16 +4,19 @@ async function newFormHandler(event) {
   const correlation_title = document.querySelector(
     'input[name="correlation-title"]'
   ).value;
-  const image_path = document.querySelector(
-    'input[name="correlated-post-url"]'
-  ).value;
+  const image_path = document.querySelector('input[name="image-path"]').value;
+  
+  // const image_path = document.querySelector(
+  //   'input[name="correlated-post-url"]'
+  // ).value;
   // const post_id = window.location.toString().split("/")[
   //   window.location.toString().split("/").length - 1
   // ];
   // const post_id = window.location.toString().length;
   // console.log(post_id);
 
-  const response = await fetch(`/api/posts/addCorrelation`, {
+  // const response = await fetch(`/api/posts/addCorrelation`, {
+  const response = await fetch(`/api/posts/correlations`, {
     method: "POST",
     body: JSON.stringify({
       // correlated_post_url: image_path,
@@ -27,7 +30,8 @@ async function newFormHandler(event) {
   });
 
   if (response.ok) {
-    document.location.reload();
+    // document.location.reload();
+    document.location.replace("/dashboard");
   } else {
     alert(response.statusText);
   }

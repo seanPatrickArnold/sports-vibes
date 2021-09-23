@@ -25,6 +25,12 @@ router.post("/", (req, res) => {
         res.status(400).json(err);
       });
   }
+
+  PostCorrelation.create({
+    
+  })
+
+
 });
 
 router.put("/upvote", (req, res) => {
