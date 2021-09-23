@@ -1,16 +1,16 @@
 {
   "name": "hacker-news-clone",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "seeds": "node seeds/index.js"
+    "seeds": "node seeds/index.js",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^4.0.1",
+    "bcrypt": "^5.0.1",
     "connect-session-sequelize": "^7.1.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -22,5 +22,14 @@
   },
   "devDependencies": {
     "jest": "^27.1.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seanPatrickArnold/sports-vibes.git"
+  },
+  "bugs": {
+    "url": "https://github.com/seanPatrickArnold/sports-vibes/issues"
+  },
+  "homepage": "https://github.com/seanPatrickArnold/sports-vibes#readme",
+  "description": ""
 }
