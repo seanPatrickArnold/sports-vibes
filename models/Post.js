@@ -18,7 +18,7 @@ class Post extends Model {
       })
       .then(() => { return })
       .catch(err => {
-        window.alert(err.sqlMessage);
+        console.log(err.sqlMessage);
       });
     });
   };
