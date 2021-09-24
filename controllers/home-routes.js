@@ -6,6 +6,7 @@ const { Post, User, Vote, PostCorrelation } = require('../models');
 router.get("/", (req, res) => {
   console.log("======================");
   Post.findAll({
+    limit: 7,
     order: [
         ['id', 'DESC']
     ],
