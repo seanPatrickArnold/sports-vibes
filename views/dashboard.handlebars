@@ -1,4 +1,4 @@
-<section>
+<section class='newPost'>
   <h2>Create New Post</h2>
 
   <form class="new-post-form">
@@ -24,7 +24,9 @@
     {{#each posts as |post|}}
     <li>
       {{> post-info post}}
-      <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a>
+      <div style='float: right;top: 50%;left: 50%;transform: translate(-75%,-200%);'>
+        <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a>
+      </div>
     </li>
     {{/each}}
   </ol>
