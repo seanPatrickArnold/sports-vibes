@@ -25,6 +25,9 @@ async function newFormHandler(event) {
     const type_image = typeObject.type_image;
     const type_audio = typeObject.type_audio;
 
+    console.log(type_image);
+    console.log(type_audio);
+
   
     const response = await fetch(`/api/posts`, {
       method: 'POST',
