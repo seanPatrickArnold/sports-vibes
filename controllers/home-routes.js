@@ -6,11 +6,15 @@ const { Post, User, Vote, PostCorrelation } = require('../models');
 router.get('/', (req, res) => {
   console.log('======================');
   Post.findAll({
+    order: [
+        ['id', 'DESC']
+    ],
     attributes: [
       'id',
       'post_url',
       'title',
-      'created_at'
+      'created_at',
+
     ]
   })
     .then(dbPostData => {
