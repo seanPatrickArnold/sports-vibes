@@ -21,6 +21,8 @@ const sess = {
   })
 };
 
+
+
 const hbs = exphbs.create({ helpers });
 
 app.use(session(sess));
@@ -38,4 +40,4 @@ sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
 });
 
-// seedAll();
+seedAll();
