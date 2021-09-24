@@ -14,6 +14,8 @@ class Post extends Model {
         attributes: [
           "id",
           "post_url",
+          // "imageItem",
+          "image_item",
           "title",
           "created_at",
           [
@@ -43,6 +45,14 @@ Post.init(
     },
     post_url: {
       type: DataTypes.STRING,
+      allowNull: false,
+    },
+    // imageItem: {
+    //   type: DataTypes.BLOB,
+    //   allowNull: false,
+    // },
+    image_item: {
+      type: DataTypes.BLOB,
       allowNull: false,
     },
     user_id: {

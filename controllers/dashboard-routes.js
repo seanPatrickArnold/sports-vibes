@@ -14,6 +14,8 @@ router.get("/", withAuth, (req, res) => {
       attributes: [
         "id",
         "post_url",
+        // "imageItem",
+        "image_item",
         "title",
         "created_at",
         [
@@ -50,6 +52,8 @@ router.get("/edit/:id", withAuth, (req, res) => {
     attributes: [
       "id",
       "post_url",
+      // "imageItem",
+      "image_item",
       "title",
       "created_at",
       [

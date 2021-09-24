@@ -1,18 +1,37 @@
 <article class="post">
   <div class="title">
-    <a href="{{post.post_url}}" target="_blank">{{post.title}}</a>
+    <h2>{{post.title}}</h2>
+    <img src='{{post.post_url}}' id='post-image'></img>
     <span>({{post.post_url}})</span>
   </div>
-  <div class="meta">
-    {{post.vote_count}}
-    point(s) by
-    {{post.user.username}}
-    on
-    {{post.created_at}}
-
-  </div>
 </article>
+<section class="new-correlation-form">
+  <h2>Create New Correlation</h2>
 
-{{#if loggedIn}}
-  <script src="/javascript/upvote.js"></script>
-{{/if}}
+  <form>
+    <div>
+      <label for="correlted-post-url">Link</label>
+      <input id="correlated-post-url" name="correlated-post-url" />
+    </div>
+    <button type="submit" class="btn">Create</button>
+  </form>
+</section>
+<div class="correlated-posts">
+  <h2>Correlated Posts {{post.loggedIn}}</h2>
+  <div id="correlations-div">
+    {{#each post.post_correlations}}
+    <div class="correlations" id='correlation-{{correlated_post_id}}'>
+      <br></br>
+      <img src='{{post.post_url}}' class='correlated-image'></img>
+      <br></br>
+      <a href="/post/{{correlated_post_id}}">{{post.title}}</a>
+      <p>Votes: <span id='vote-count'>{{voteCount}}</span></p>
+      <button class="upvote-btn" id='correlation-{{correlated_post_id}}-btn'>Upvote</button>
+      <br></br>
+    </div>
+    {{/each}}
+  </div>
+</div>
+
+<script src="/javascript/upvote.js"></script>
+<script src="/javascript/add-correlation.js"></script>

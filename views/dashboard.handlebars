@@ -1,4 +1,3 @@
-
 <section>
   <h2>Upload Image</h2>
 
@@ -8,7 +7,12 @@
       <input type="text" id="post-title" name="post-title" />
     </div>
     <div>
-      <label for="post-url">Image</label>
+    <div>
+      <label for="post-url">Link</label>
+      <input id="post-url" name="post-url" />
+    </div>
+      {{!-- <label for="imageItem">Image</label> --}}
+      <label for="image_item">Image</label>
       <input type="file" id="post-url" name="postUrl" accept="image/*" />
     </div>
     <button type="submit" class="btn">Post</button>
