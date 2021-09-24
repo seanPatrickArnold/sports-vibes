@@ -2,32 +2,26 @@ const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 // create our Post model
 class Post extends Model {
-  static upvote(body, models) {
-    return models.Vote.create({
-      user_id: body.user_id,
-      post_id: body.post_id,
-    }).then(() => {
-      return Post.findOne({
-        where: {
-          id: body.post_id,
-        },
-        attributes: [
-          "id",
-          "post_url",
-          // "imageItem",
-          "image_item",
-          "title",
-          "created_at",
-          [
-            sequelize.literal(
-              "(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)"
-            ),
-            "vote_count",
-          ],
-        ],
+  static addCorrelation(body, models) {
+    return Post.findOne({
+    where: {
+      post_url: body.correlated_post_url
+    },
+    attributes: [
+      'id'
+    ]
+    }).then((data) => {
+      return models.PostCorrelation.create({
+        correlated_post_id: data.id,
+        post_id: body.post_id,
+        user_id: body.user_id
+      })
+      .then(() => { return })
+      .catch(err => {
+        console.log(err.sqlMessage);
       });
     });
-  }
+  };
 }
 
 // create fields/columns for Post model
@@ -46,14 +40,18 @@ Post.init(
     post_url: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
+      validate: {
+        isURL: true
+      }
     },
-    // imageItem: {
-    //   type: DataTypes.BLOB,
-    //   allowNull: false,
-    // },
-    image_item: {
-      type: DataTypes.BLOB,
-      allowNull: false,
+    type_image: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    type_audio: {
+      type: DataTypes.STRING,
+      allowNull: true
     },
     user_id: {
       type: DataTypes.INTEGER,

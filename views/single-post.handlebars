@@ -1,11 +1,13 @@
 <article class="post">
   <div class="title">
     <h2>{{post.title}}</h2>
-    <img src='{{post.post_url}}' id='post-image'></img>
+    {{#if post.type_audio}}
+      <a href="{{post.post_url}}" id='post-audio'>{{post.title}}</a>
+    {{/if}}
+    <br></br>
     <span>({{post.post_url}})</span>
   </div>
 </article>
-<section class="new-correlation-form">
   <h2>Create New Correlation</h2>
 
   <form>
@@ -17,17 +19,25 @@
   </form>
 </section>
 <div class="correlated-posts">
-  <h2>Correlated Posts {{post.loggedIn}}</h2>
+  <h2>Correlated Posts</h2>
   <div id="correlations-div">
     {{#each post.post_correlations}}
     <div class="correlations" id='correlation-{{correlated_post_id}}'>
       <br></br>
-      <img src='{{post.post_url}}' class='correlated-image'></img>
-      <br></br>
-      <a href="/post/{{correlated_post_id}}">{{post.title}}</a>
-      <p>Votes: <span id='vote-count'>{{voteCount}}</span></p>
-      <button class="upvote-btn" id='correlation-{{correlated_post_id}}-btn'>Upvote</button>
-      <br></br>
+      <p>{{type_image}}</p>
+      {{#if post.type_image}}
+        <img src='{{post.post_url}}' class='correlated-image'></img>
+      {{/if}}
+      {{#if post.type_audio}}
+        <a href="{{post.post_url}}" class='correlated-audio'>{{post.title}}</a>
+      {{/if}}
+      <div class='meta'>
+        <p class='meta-p'>
+          <a href="/post/{{correlated_post_id}}">{{post.title}}</a>
+          <p>Votes: <span id='vote-count'>{{voteCount}}</span></p>
+          <button class="upvote-btn" id='correlation-{{correlated_post_id}}-btn'>Upvote</button>
+        </p>
+      </div>
     </div>
     {{/each}}
   </div>

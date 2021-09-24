@@ -1,5 +1,5 @@
-<section>
-  <h2>Upload Image</h2>
+<section class='newPost'>
+  <h2>Create New Post</h2>
 
   <form class="new-post-form">
     <div>
@@ -11,11 +11,11 @@
       <label for="post-url">Link</label>
       <input id="post-url" name="post-url" />
     </div>
-      {{!-- <label for="imageItem">Image</label> --}}
-      <label for="image_item">Image</label>
-      <input type="file" id="post-url" name="postUrl" accept="image/*" />
+    <div>
+      <label for="post-type">Post Type (image or audio)</label>
+      <input id="post-type" name="post-type" />
     </div>
-    <button type="submit" class="btn">Post</button>
+    <button type="submit" class="btn">Create</button>
   </form>
 </section>
 {{#if posts.length}}
@@ -25,7 +25,9 @@
     {{#each posts as |post|}}
     <li>
       {{> post-info post}}
-      <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a>
+      <div style='float: right;top: 50%;left: 50%;transform: translate(-75%,-200%);'>
+        <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a>
+      </div>
     </li>
     {{/each}}
   </ol>

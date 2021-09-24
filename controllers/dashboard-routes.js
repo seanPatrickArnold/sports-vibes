@@ -3,8 +3,7 @@ const sequelize = require("../config/connection");
 const { Post, User } = require("../models");
 const withAuth = require("../utils/auth");
 
-router.get("/", withAuth, (req, res) => {
-  console.log("MAXAGE: ", req.session.cookie.maxAge);
+router.get('/', withAuth, (req, res) => {
   if (req.session) {
     Post.findAll({
       where: {
@@ -12,25 +11,15 @@ router.get("/", withAuth, (req, res) => {
         user_id: req.session.user_id,
       },
       attributes: [
-        "id",
-        "post_url",
-        // "imageItem",
-        "image_item",
-        "title",
-        "created_at",
-        [
-          sequelize.literal(
-            "(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)"
-          ),
-          "vote_count",
-        ],
+        'id',
+        'post_url',
+        'title'
       ],
-      include: [
-        {
-          model: User,
-          attributes: ["username"],
-        },
-      ],
+      include: {
+        model: User,
+        attributes: ['username']
+      }
+      
     })
       .then((dbPostData) => {
         // serialize data before passing to template
@@ -44,45 +33,30 @@ router.get("/", withAuth, (req, res) => {
   }
 });
 
-router.get("/edit/:id", withAuth, (req, res) => {
-  Post.findOne({
-    where: {
-      id: req.params.id,
-    },
-    attributes: [
-      "id",
-      "post_url",
-      // "imageItem",
-      "image_item",
-      "title",
-      "created_at",
-      [
-        sequelize.literal(
-          "(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)"
-        ),
-        "vote_count",
-      ],
-    ],
-    include: [
-      {
-        model: User,
-        attributes: ["username"],
-      },
-    ],
-  })
-    .then((dbPostData) => {
-      if (!dbPostData) {
-        res.status(404).json({ message: "No post found with this id" });
-        return;
-      }
-      const post = dbPostData.get({ plain: true });
-
-      res.render("edit-post", { post, loggedIn: true });
+  router.get('/edit/:id', withAuth, (req, res) => {
+    console.log(req.params.id);
+    Post.findOne({
+        where: {
+            id: req.params.id
+        },
+        attributes: [
+          'id',
+          'post_url',
+          'title'
+        ]
     })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+        .then(dbPostData => {
+        if (!dbPostData) {
+          res.render('edit-post');
+        }
+        const post = dbPostData.get({ plain: true });
+        
+        res.render('edit-post', { post, loggedIn: true });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
 });
 
 module.exports = router;
