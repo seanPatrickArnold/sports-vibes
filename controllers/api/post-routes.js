@@ -37,6 +37,10 @@ router.get('/:id', (req, res) => {
     include: [
       {
         model: PostCorrelation,
+        limit: 4,
+        order: [
+            ['id', 'DESC']
+        ],
         attributes: [
           'id',
           'correlated_post_id',
@@ -50,7 +54,7 @@ router.get('/:id', (req, res) => {
             [sequelize.literal('(SELECT post_url FROM post WHERE post.id = post_correlations.correlated_post_id)'), 'post_url'],
             [sequelize.literal('(SELECT title FROM post WHERE post.id = post_correlations.correlated_post_id)'), 'title']
           ]
-        }
+        },
       },
       {
         model: User,
@@ -83,7 +87,7 @@ router.post('/', (req, res) => {
     .then(dbPostData => res.json(dbPostData))
     .catch(err => {
       console.log(err);
-      res.json(err);
+      res.send(err);
     });
 });
 
@@ -120,3 +124,5 @@ router.delete('/:id', withAuth, (req, res) => {
 });
 
 module.exports = router;
+
+
