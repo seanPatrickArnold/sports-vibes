@@ -1,3 +1,8 @@
+function sleep(delay) {
+  var start = new Date().getTime();
+  while (new Date().getTime() < start + delay);
+}
+
 async function signupFormHandler(event) {
   event.preventDefault();
 
@@ -15,6 +20,8 @@ async function signupFormHandler(event) {
       }),
       headers: { "Content-Type": "application/json" },
     });
+
+    sleep(1000);
 
     // check the response status
     if (response.ok) {
@@ -41,6 +48,8 @@ async function loginFormHandler(event) {
       headers: { "Content-Type": "application/json" },
     });
 
+    sleep(1000);
+    
     // check the response status
     if (response.ok) {
       document.location.replace("/dashboard");
