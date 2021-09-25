@@ -3,8 +3,8 @@ const sequelize = require('../config/connection');
 const { Post, User, Vote, PostCorrelation } = require('../models');
 
 // get all posts for homepage
-router.get("/", (req, res) => {
-  console.log("======================");
+router.get('/', (req, res) => {
+  console.log('======================');
   Post.findAll({
     limit: 7,
     order: [
@@ -18,33 +18,34 @@ router.get("/", (req, res) => {
 
     ]
   })
-    .then((dbPostData) => {
-      const posts = dbPostData.map((post) => post.get({ plain: true }));
+    .then(dbPostData => {
+      const posts = dbPostData.map(post => post.get({ plain: true }));
 
-      res.render("homepage", {
+
+      res.render('homepage', {
         posts: posts,
-        loggedIn: req.session.loggedIn,
+        loggedIn: req.session.loggedIn
       });
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err);
       res.status(500).json(err);
     });
 });
 
-router.get("/login", (req, res) => {
+router.get('/login', (req, res) => {
   if (req.session.loggedIn) {
-    res.redirect("/");
+    res.redirect('/');
     return;
   }
 
-  res.render("login");
+  res.render('login');
 });
 
-router.get("/post/:id", (req, res) => {
+router.get('/post/:id', (req, res) => {
   Post.findOne({
     where: {
-      id: req.params.id,
+      id: req.params.id
     },
     attributes: [
       'id',
@@ -80,13 +81,13 @@ router.get("/post/:id", (req, res) => {
       },
       {
         model: User,
-        attributes: ["username"],
-      },
-    ],
+        attributes: ['username']
+      }
+    ]
   })
-    .then((dbPostData) => {
+    .then(dbPostData => {
       if (!dbPostData) {
-        res.status(404).json({ message: "No post found with this id" });
+        res.status(404).json({ message: 'No post found with this id' });
         return;
       }
 
@@ -110,7 +111,7 @@ router.get("/post/:id", (req, res) => {
         }
       );
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err);
       res.status(500).json(err);
     });

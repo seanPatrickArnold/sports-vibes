@@ -7,7 +7,6 @@
       <input type="text" id="post-title" name="post-title" />
     </div>
     <div>
-    <div>
       <label for="post-url">Link</label>
       <input id="post-url" name="post-url" />
     </div>
@@ -20,7 +19,7 @@
 </section>
 {{#if posts.length}}
 <section>
-  <h2>Your Posts</h2>
+  <h2 class="your-posts">Your Posts</h2>
   <ol>
     {{#each posts as |post|}}
     <li>

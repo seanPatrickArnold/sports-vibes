@@ -1,8 +1,8 @@
 // import all models
-const Post = require('./Post');
-const User = require('./User');
-const Vote = require('./Vote');
-const PostCorrelation = require('./PostCorrelation');
+const Post = require("./Post");
+const User = require("./User");
+const Vote = require("./Vote");
+const PostCorrelation = require("./PostCorrelation");
 
 // create associations
 User.hasMany(Post, {
@@ -16,7 +16,7 @@ Post.belongsTo(User, {
 
 User.belongsToMany(PostCorrelation, {
   through: Vote,
-  as: 'voted_correlations',
+  as: "voted_correlations",
 
   foreignKey: "user_id",
   onDelete: "SET NULL",
@@ -24,9 +24,9 @@ User.belongsToMany(PostCorrelation, {
 
 PostCorrelation.belongsToMany(User, {
   through: Vote,
-  as: 'voted_correlations',
-  foreignKey: 'post_correlation_id',
-  onDelete: 'SET NULL'
+  as: "voted_correlations",
+  foreignKey: "post_correlation_id",
+  onDelete: "SET NULL",
 });
 
 Vote.belongsTo(User, {
@@ -35,8 +35,8 @@ Vote.belongsTo(User, {
 });
 
 Vote.belongsTo(PostCorrelation, {
-  foreignKey: 'post_correlation_id',
-  onDelete: 'SET NULL'
+  foreignKey: "post_correlation_id",
+  onDelete: "SET NULL",
 });
 
 User.hasMany(Vote, {
@@ -44,26 +44,26 @@ User.hasMany(Vote, {
 });
 
 PostCorrelation.hasMany(Vote, {
-  foreignKey: 'post_correlation_id'
+  foreignKey: "post_correlation_id",
 });
 
 Post.belongsTo(User, {
-  foreignKey: 'user_id',
-  onDelete: 'SET NULL'
+  foreignKey: "user_id",
+  onDelete: "SET NULL",
 });
 
 PostCorrelation.belongsTo(Post, {
-  foreignKey: 'post_id',
-  onDelete: 'SET NULL'
+  foreignKey: "post_id",
+  onDelete: "SET NULL",
 });
 
 User.hasMany(PostCorrelation, {
-  foreignKey: 'user_id',
-  onDelete: 'SET NULL'
+  foreignKey: "user_id",
+  onDelete: "SET NULL",
 });
 
 Post.hasMany(PostCorrelation, {
-  foreignKey: 'post_id'
+  foreignKey: "post_id",
 });
 
 module.exports = { User, Post, Vote, PostCorrelation };

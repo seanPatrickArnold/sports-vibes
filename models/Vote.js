@@ -13,18 +13,17 @@ Vote.init(
     user_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'user',
-        key: 'id'
-      }
-
+        model: "user",
+        key: "id",
+      },
     },
     post_correlation_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'post_correlation',
-        key: 'id'
-      }
-    }
+        model: "post_correlation",
+        key: "id",
+      },
+    },
   },
   {
     sequelize,

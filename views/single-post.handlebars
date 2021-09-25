@@ -1,6 +1,9 @@
 <article class="post">
   <div class="title">
     <h2>{{post.title}}</h2>
+    {{#if post.type_image}}
+      <img src='{{post.post_url}}' id='post-image'></img>
+    {{/if}}
     {{#if post.type_audio}}
       <a href="{{post.post_url}}" id='post-audio'>{{post.title}}</a>
     {{/if}}
@@ -8,6 +11,7 @@
     <span>({{post.post_url}})</span>
   </div>
 </article>
+<section class="new-correlation-form">
   <h2>Create New Correlation</h2>
 
   <form>
