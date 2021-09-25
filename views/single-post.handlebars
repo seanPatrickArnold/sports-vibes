@@ -1,6 +1,7 @@
 <article class="post">
   <div class="title">
     <h2>{{post.title}}</h2>
+<<<<<<< HEAD
     {{#if post.type_image}}
       <img src='{{post.post_url}}' id='post-image'></img>
     {{/if}}
@@ -8,6 +9,9 @@
       <a href="{{post.post_url}}" id='post-audio'>{{post.title}}</a>
     {{/if}}
     <br></br>
+=======
+    <img src='{{post.post_url}}' id='post-image'></img>
+>>>>>>> 88f01fcbf6dcebb6ffc68447b105e85db1b51f33
     <span>({{post.post_url}})</span>
   </div>
 </article>
@@ -23,11 +27,16 @@
   </form>
 </section>
 <div class="correlated-posts">
+<<<<<<< HEAD
   <h2>Correlated Posts</h2>
+=======
+  <h2>Correlated Posts {{post.loggedIn}}</h2>
+>>>>>>> 88f01fcbf6dcebb6ffc68447b105e85db1b51f33
   <div id="correlations-div">
     {{#each post.post_correlations}}
     <div class="correlations" id='correlation-{{correlated_post_id}}'>
       <br></br>
+<<<<<<< HEAD
       <p>{{type_image}}</p>
       {{#if post.type_image}}
         <img src='{{post.post_url}}' class='correlated-image'></img>
@@ -42,10 +51,22 @@
           <button class="upvote-btn" id='correlation-{{correlated_post_id}}-btn'>Upvote</button>
         </p>
       </div>
+=======
+      <img src='{{post.post_url}}' class='correlated-image'></img>
+      <br></br>
+      <a href="/post/{{correlated_post_id}}">{{post.title}}</a>
+      <p>Votes: <span id='vote-count'>{{voteCount}}</span></p>
+      <button class="upvote-btn" id='correlation-{{correlated_post_id}}-btn'>Upvote</button>
+      <br></br>
+>>>>>>> 88f01fcbf6dcebb6ffc68447b105e85db1b51f33
     </div>
     {{/each}}
   </div>
 </div>
 
 <script src="/javascript/upvote.js"></script>
+<<<<<<< HEAD
 <script src="/javascript/add-correlation.js"></script>
+=======
+<script src="/javascript/add-correlation.js"></script>
+>>>>>>> 88f01fcbf6dcebb6ffc68447b105e85db1b51f33
