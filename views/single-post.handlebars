@@ -2,6 +2,9 @@
   <div class="title">
     <h2>{{post.title}}</h2>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> feature/image_urls
     {{#if post.type_image}}
       <img src='{{post.post_url}}' id='post-image'></img>
     {{/if}}
@@ -9,9 +12,12 @@
       <a href="{{post.post_url}}" id='post-audio'>{{post.title}}</a>
     {{/if}}
     <br></br>
+<<<<<<< HEAD
 =======
     <img src='{{post.post_url}}' id='post-image'></img>
 >>>>>>> 88f01fcbf6dcebb6ffc68447b105e85db1b51f33
+=======
+>>>>>>> feature/image_urls
     <span>({{post.post_url}})</span>
   </div>
 </article>
@@ -28,15 +34,22 @@
 </section>
 <div class="correlated-posts">
 <<<<<<< HEAD
+<<<<<<< HEAD
   <h2>Correlated Posts</h2>
 =======
   <h2>Correlated Posts {{post.loggedIn}}</h2>
 >>>>>>> 88f01fcbf6dcebb6ffc68447b105e85db1b51f33
+=======
+  <h2>Correlated Posts</h2>
+>>>>>>> feature/image_urls
   <div id="correlations-div">
     {{#each post.post_correlations}}
     <div class="correlations" id='correlation-{{correlated_post_id}}'>
       <br></br>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> feature/image_urls
       <p>{{type_image}}</p>
       {{#if post.type_image}}
         <img src='{{post.post_url}}' class='correlated-image'></img>
@@ -51,6 +64,7 @@
           <button class="upvote-btn" id='correlation-{{correlated_post_id}}-btn'>Upvote</button>
         </p>
       </div>
+<<<<<<< HEAD
 =======
       <img src='{{post.post_url}}' class='correlated-image'></img>
       <br></br>
@@ -59,6 +73,8 @@
       <button class="upvote-btn" id='correlation-{{correlated_post_id}}-btn'>Upvote</button>
       <br></br>
 >>>>>>> 88f01fcbf6dcebb6ffc68447b105e85db1b51f33
+=======
+>>>>>>> feature/image_urls
     </div>
     {{/each}}
   </div>
@@ -66,7 +82,11 @@
 
 <script src="/javascript/upvote.js"></script>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <script src="/javascript/add-correlation.js"></script>
 =======
 <script src="/javascript/add-correlation.js"></script>
 >>>>>>> 88f01fcbf6dcebb6ffc68447b105e85db1b51f33
+=======
+<script src="/javascript/add-correlation.js"></script>
+>>>>>>> feature/image_urls

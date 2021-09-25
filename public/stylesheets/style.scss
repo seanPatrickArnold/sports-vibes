@@ -1,6 +1,24 @@
+// Variables START
+$white: #f4f9f9;
+$black: #000;
+$red: #e70000;
+$purple: #800080;
+$orange: #ffa500;
+$grey: #808080;
+
+$dark-blue: #225ca3;
+// $light-blue: #3486eb;
+$delete-color: #d41414;
+$hover-delete-color: #ff643d;
+$upvote-color: #197d0f;
+$upvote-hover-color: #1f9c13;
+$list-odd: #fff5eb;
+$footer: #ccc;
+// Variables END
+
+// Elements START
 * {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body,
@@ -8,48 +26,43 @@ html {
   height: 100%;
   padding: 0;
   margin: 0 auto;
+  // max-width: 1000px;
   font-family: sans-serif;
-  color: #000;
+  color: $black;
   background-image: url("../images/data-correlation.png");
-  background-color: #000;
+  background-color: $black;
 }
 
 a {
   text-decoration: none;
-  color: #000;
+  color: $black;
   font-weight: bold;
-  -webkit-transition: color 0.1s;
   transition: color 0.1s;
-}
 
-a:hover {
-  color: #ffa500;
+  &:hover {
+    color: $orange;
+  }
 }
 
 button {
   background-color: #225ca3;
   border: 0;
   padding: 1%;
-  color: #f4f9f9;
+  color: $white;
   font-weight: bold;
-  -webkit-transition: background-color 0.1s;
   transition: background-color 0.1s;
   cursor: pointer;
   border-radius: 5%;
-}
 
-button:hover {
-  background-color: #3486eb;
+  &:hover {
+    background-color: #3486eb;
+  }
 }
 
 footer {
-  border-top: 3px solid #ffa500;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  border-top: 3px solid $orange;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
   padding: 1%;
   font-size: 110%;
 }
@@ -63,27 +76,19 @@ form label {
 }
 
 header {
-  border-bottom: 3px solid #ffa500;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  border-bottom: 3px solid $orange;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: space-between;
+  align-items: center;
   padding: 0 1%;
-}
 
-header h1 {
-  font-size: 1em;
+  h1 {
+    font-size: 1em;
+  }
 }
 
 main {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  flex: 1;
   padding: 2% 4%;
 }
 
@@ -104,43 +109,50 @@ input:focus {
   outline: none;
   border: 1px solid #3486eb;
 }
+// Elements END
 
+// Buttons START
 .btn-no-style {
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
   text-decoration: none;
-  color: #000;
+  color: $black;
   font-size: 100%;
   font-weight: bold;
-  -webkit-transition: color 0.1s;
   transition: color 0.1s;
   margin-left: 16px;
-}
 
-.btn-no-style:hover {
-  background: none;
-  color: #ffa500;
+  &:hover {
+    background: none;
+    // border-radius: 5px;
+    color: $orange;
+    // background-color: $black;
+    // padding: 3px 5px;
+  }
 }
 
 .delete-post-btn {
   background-color: #d41414;
-}
 
-.delete-post-btn:hover {
-  background-color: #ff643d;
+  &:hover {
+    background-color: #ff643d;
+  }
 }
 
 .upvote-btn {
   background-color: #197d0f;
-  -webkit-transition: background-color 0.1s;
   transition: background-color 0.1s;
+
+  &:hover {
+    background-color: #1f9c13;
+  }
 }
 
-.upvote-btn:hover {
-  background-color: #1f9c13;
-}
+// Buttons END
+
+// Comment START
 
 .comment-form {
   margin-bottom: 5%;
@@ -149,44 +161,53 @@ input:focus {
 .comment {
   padding: 1%;
   margin-bottom: 1%;
-}
 
-.comment:nth-child(odd) {
-  background-color: #fff5eb;
-}
+  &:nth-child(odd) {
+    background-color: #fff5eb;
+  }
 
-.comment .meta {
-  font-size: 90%;
-  margin-bottom: 0.5%;
-  opacity: 0.6;
+  & .meta {
+    font-size: 90%;
+    margin-bottom: 0.5%;
+    opacity: 0.6;
+  }
 }
+// Comment END
+
+// Correlated Start
 
 .correlated-image {
   height: 300px;
   width: 300px;
 }
 
+// Correlated END
+
+// Edit START
 .edit-link {
   display: block;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-20%, -65%);
-          transform: translate(-20%, -65%);
+  transform: translate(-20%, -65%);
+  // margin: -1.5% 0 2% 0;
 }
 
 .edit-post-form {
   margin-bottom: 5%;
 }
 
+// Edit END
+
+// Post START
 .post {
   margin-bottom: 2%;
   line-height: 150%;
-}
 
-.post .title span {
-  font-style: italic;
-  font-size: 90%;
-  color: #7d7d7d;
+  .title span {
+    font-style: italic;
+    font-size: 90%;
+    color: #7d7d7d;
+  }
 }
 
 .post-list {
@@ -202,6 +223,7 @@ input:focus {
 .your-posts {
   text-align: center;
 }
+// Post END
 
 .new-post-form input {
   width: 300px;
@@ -218,7 +240,7 @@ input:focus {
   margin: auto;
   margin-top: 10px;
   width: 90%;
-  background-color: #f4f9f9;
+  background-color: $white;
   padding: 5%;
   border: 2px solid rgba(131, 131, 131, 0.76);
   border-radius: 15px;
@@ -249,24 +271,20 @@ input:focus {
   min-height: 100%;
   max-width: 1000px;
   margin: 0 auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
 }
 
 .wrapper header,
 .wrapper footer {
-  background-color: #808080;
+  background-color: $grey;
 }
 
 @media (min-width: 412px) and (max-width: 800px) {
   .edit-link {
     position: relative;
     display: block;
+    // position: fixed;
     left: -5%;
     margin-bottom: -20%;
   }
@@ -278,6 +296,8 @@ input:focus {
     display: block;
     margin-bottom: -20%;
     left: 55%;
+    // transform: translate(-20%, -5%);
+    // margin: -1.5% 0 2% 0;
   }
 }
 
@@ -287,4 +307,13 @@ input:focus {
     margin: 0 -10% -20% 0;
   }
 }
-/*# sourceMappingURL=style.css.map */
+
+// .hero {
+//   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))
+//   url("/public/images/main__background.jpg");
+//   height: 50%;
+//   background-position: center;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+//   position: relative;
+// }
