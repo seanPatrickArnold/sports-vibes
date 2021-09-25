@@ -37,6 +37,7 @@ router.get('/:id', (req, res) => {
     include: [
       {
         model: PostCorrelation,
+        separate: true,
         limit: 4,
         order: [
             ['id', 'DESC']
